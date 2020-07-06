@@ -35,21 +35,25 @@ export type StateType = {
     profilePage: ProfilePageType,
     dialogsPage: DialogsPageType
 }
+export type DispatchActionType = {
+    type: string
+    newText?: string
+}
 
 export type StoreType = {
     _state: StateType
-    getState:  Function
-    _callSubscriber:  (state: StateType) => void
-    addPost: () => void
-    updateNewPostText:  (newText: string) => void
+    getState: Function
+    _callSubscriber: (state: StateType) => void
+   /* addPost: () => void
+    updateNewPostText: (newText: string) => void
     addMessage: () => void
-    updateNewMessgeText: (newText: string) => void
+    updateNewMessgeText: (newText: string) => void*/
     subscribe: (observer: any) => void
-
+    dispatch: (action: DispatchActionType) => void
 }
 
 export let store: StoreType = {
-     _state: {
+    _state: {
         profilePage: {
             postData: [
                 {id: "1", message: "Hello", likesCount: 10},
@@ -81,44 +85,75 @@ export let store: StoreType = {
         }
 
     },
-    _callSubscriber ()  {
+    _callSubscriber() {
         console.log("  ")
     },
 
-    getState () {
-         return this._state
+    getState() {
+        return this._state
+    },
+    subscribe(observer: any) {
+        this._callSubscriber = observer;
     },
 
-     addPost  ()  {
+   /* addPost() {
         let newPostData = {
             id: "5",
             message: this._state.profilePage.newPostText,
             likesCount: 0
         };
         this._state.profilePage.postData.push(newPostData);
-         this._state.profilePage.newPostText="";
-         this._callSubscriber(this._state);
+        this._state.profilePage.newPostText = "";
+        this._callSubscriber(this._state);
     },
-     updateNewPostText  (newText: string)  {
-         this._state.profilePage.newPostText = newText;
-         this._callSubscriber(this._state);
+    updateNewPostText(newText: string) {
+        this._state.profilePage.newPostText = newText;
+        this._callSubscriber(this._state);
     },
-     addMessage ()  {
+    addMessage() {
         let messageData = {
             id: "6",
             message: this._state.dialogsPage.newMessageText
         }
-         this._state.dialogsPage.messagesData.push(messageData);
-         this._state.dialogsPage.newMessageText="";
-         this._callSubscriber(this._state);
+        this._state.dialogsPage.messagesData.push(messageData);
+        this._state.dialogsPage.newMessageText = "";
+        this._callSubscriber(this._state);
     },
-     updateNewMessgeText  (newText: string)  {
-         this._state.dialogsPage.newMessageText = newText;
-         this._callSubscriber(this._state);
-    },
-     subscribe  (observer: any)  {
-         this._callSubscriber= observer;
+    updateNewMessgeText(newText: string) {
+        this._state.dialogsPage.newMessageText = newText;
+        this._callSubscriber(this._state);
+    },*/
+    dispatch(action) {
+        if (action.type === "ADD-POST") {
+            let newPostData = {
+                id: "5",
+                message: this._state.profilePage.newPostText,
+                likesCount: 0
+            };
+            this._state.profilePage.postData.push(newPostData);
+            this._state.profilePage.newPostText = "";
+            this._callSubscriber(this._state);
+        } else if (action.type === "UPDATE-NEW-POST-TEXT") {
+            if (action.newText != undefined) {
+                this._state.profilePage.newPostText = action.newText;
+            }
+            this._callSubscriber(this._state);
+        } else if (action.type === "ADD-MESSAGE") {
+            let messageData = {
+                id: "6",
+                message: this._state.dialogsPage.newMessageText
+            }
+            this._state.dialogsPage.messagesData.push(messageData);
+            this._state.dialogsPage.newMessageText = "";
+            this._callSubscriber(this._state);
+        } else if (action.type === "UPDATE-NEW-MESSAGE-TEXT") {
+            if (action.newText != undefined) {
+                this._state.dialogsPage.newMessageText = action.newText;
+            }
+            this._callSubscriber(this._state);
+        }
     }
+
 }
 
 

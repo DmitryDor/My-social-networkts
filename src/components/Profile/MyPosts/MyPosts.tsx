@@ -1,14 +1,17 @@
 import React, {DetailedHTMLProps, TextareaHTMLAttributes} from 'react';
 import styles from "./MyPosts.module.css";
 import Post from "./Post/Post";
-import {PostType} from "../../../redux/state";
+import {DispatchActionType, PostType} from "../../../redux/state";
+import {type} from "os";
 
 
 type PropsType = {
     postData: Array<PostType>,
-    addPost: Function,
+    /*addPost: Function,*/
     newPostText: string
-    updateNewPostText:Function
+    /*updateNewPostText:Function*/
+    dispatch: (action: DispatchActionType) => void
+
 }
 
 
@@ -25,12 +28,12 @@ const MyPosts = (props: PropsType) => {
 
     let newPostElement: any = React.createRef();
     let addPost = () => {
-        props.addPost();
+        props.dispatch({type: "ADD-POST"});
 
     }
     let onPostChange = () => {
         let text = newPostElement.current.value;
-        props.updateNewPostText(text);
+        props.dispatch({type: "UPDATE-NEW-POST-TEXT", newText: text});
 
     }
 

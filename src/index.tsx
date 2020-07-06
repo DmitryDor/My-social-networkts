@@ -10,9 +10,7 @@ import { StateType} from "./redux/state";
  let rerenderEntireTree = (state: StateType) => {
     ReactDOM.render(
         <React.StrictMode>
-            <App state={state} addPost={store.addPost.bind(store)} updateNewPostText={store.updateNewPostText.bind(store)}
-            addMessage={store.addMessage.bind(store)} updateNewMessageText= {store.updateNewMessgeText.bind(store)}
-            />
+            <App state={state} dispatch={store.dispatch.bind(store)} />
         </React.StrictMode>,
         document.getElementById('root')
     );
