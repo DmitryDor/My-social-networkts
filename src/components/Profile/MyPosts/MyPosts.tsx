@@ -1,7 +1,8 @@
 import React, {DetailedHTMLProps, TextareaHTMLAttributes} from 'react';
 import styles from "./MyPosts.module.css";
 import Post from "./Post/Post";
-import {addPostActionCreator, DispatchActionType, PostType, updateNewPostTextCreater} from "../../../redux/state";
+import { DispatchActionType, PostType} from "../../../redux/state";
+import {addPostActionCreator, updateNewPostTextCreater} from "../../../redux/profileReducer";
 
 
 type PropsType = {
@@ -9,11 +10,6 @@ type PropsType = {
     newPostText: string
     dispatch: (action: DispatchActionType) => void
 }
-
-
-
-
-
 
 const MyPosts = (props: PropsType) => {
 
