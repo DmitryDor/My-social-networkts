@@ -13,10 +13,6 @@ import {DispatchActionType, StateType} from "./redux/state";
 
 export type PropsType = {
     state: StateType
- /*   addPost: Function
-    updateNewPostText: Function
-    addMessage: Function
-    updateNewMessageText: Function*/
     dispatch: (action: DispatchActionType) => void
 }
 

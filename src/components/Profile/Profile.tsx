@@ -1,15 +1,11 @@
 import React from 'react';
-
 import MyPosts from "./MyPosts/MyPosts";
 import ProfileInfo from "./ProfileInfo/ProfileInfo";
 import {DispatchActionType, ProfilePageType} from "../../redux/state";
-/*import {PostType} from "./../../index";*/
 
 
 type PropsType = {
     profilePage: ProfilePageType
-   /* addPost: Function,
-    updateNewPostText: Function*/
     dispatch: (action: DispatchActionType) => void
 }
 
