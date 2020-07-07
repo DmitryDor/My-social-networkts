@@ -17,22 +17,19 @@ type PropsType = {
 }
 
 
-
-
-
 const Dialogs = (props: PropsType) => {
 
 
     let dialogsElements = props.dialogsPage.dialogsData.map(dialog => <DialogItem name={dialog.name} id={dialog.id}/>);
     let messagesElements = props.dialogsPage.messagesData.map(message => <Message message={message.message}/>);
 
-    let newMessgeElement: any= React.createRef();
+    let newMessgeElement: any = React.createRef();
 
     let addMessage = () => {
         props.dispatch(addMessageActionCreator());
     }
     let onMessageChange = () => {
-        let text =  newMessgeElement.current.value;
+        let text = newMessgeElement.current.value;
         props.dispatch(updateNewMessageTextCreater(text));
     }
 
@@ -46,9 +43,10 @@ const Dialogs = (props: PropsType) => {
             </div>
             <div>
                 <textarea
+                    placeholder="Enter your message"
                     onChange={onMessageChange}
                     ref={newMessgeElement}
-                value={props.dialogsPage.newMessageText}
+                    value={props.dialogsPage.newMessageText}
                 />
             </div>
             <div>
