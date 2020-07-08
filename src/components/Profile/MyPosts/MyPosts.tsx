@@ -1,7 +1,7 @@
 import React, {DetailedHTMLProps, TextareaHTMLAttributes} from 'react';
 import styles from "./MyPosts.module.css";
 import Post from "./Post/Post";
-import { DispatchActionType, PostType} from "../../../redux/state";
+import { DispatchActionType, PostType} from "../../../redux/store";
 import {addPostActionCreator, updateNewPostTextCreater} from "../../../redux/profileReducer";
 
 

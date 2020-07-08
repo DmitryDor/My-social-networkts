@@ -10,11 +10,7 @@ export type MessagesType = {
     id: string,
     message: string
 }
-/*
-export type PropsType = {
-    dialogsData: Array<DialogsType>
-    messagesData: Array<MessagesType>
-}*/
+
 
 export type PostType = {
     id: string,
@@ -39,19 +35,6 @@ export type StateType = {
     dialogsPage: DialogsPageType
 }
 
-/*type AddPostActionCreatorType = {
-    addPostActionCreator: () => void
-}
-type UpdateNewPostTextCreaterType = {
-    updateNewPostTextCreater: (text: string) => void
-}
-
-type AddMessageActionCreatorType = {
-    addMessageActionCreator: () => void
-}
-type UpdateNewMessageTextCreaterType = {
-    updateNewMessageTextCreater: (text: string) => void
-}*/
 
 
 export type DispatchActionType = any/* {
@@ -114,8 +97,8 @@ export let store: StoreType = {
 
     dispatch(action) {
 
-        profileReducer(this._state.profilePage, action);
-        dialogsReducer(this._state.dialogsPage, action);
+        this._state.profilePage = profileReducer(this._state.profilePage, action);
+        this._state.dialogsPage = dialogsReducer(this._state.dialogsPage, action);
         this._callSubscriber(this._state);
     }
 
