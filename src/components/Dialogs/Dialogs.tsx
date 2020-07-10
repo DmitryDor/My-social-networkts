@@ -1,4 +1,4 @@
-import React from "react";
+import React, {ChangeEvent} from "react";
 import styles from "./Dialogs.module.css"
 import DialogItem from "./DialogItem/DialogItem";
 import Message from "./Message/Message";
@@ -8,25 +8,25 @@ import {addMessageActionCreator, updateNewMessageTextCreater} from "../../redux/
 
 type PropsType = {
     dialogsPage: DialogsPageType
-    dispatch: (action: DispatchActionType) => void
-
+    updateNewMessageText: (text: string) => void
+    addMessage: () => void
 }
 
 
 const Dialogs = (props: PropsType) => {
-
+    let state = props.dialogsPage
 
     let dialogsElements = props.dialogsPage.dialogsData.map(dialog => <DialogItem name={dialog.name} id={dialog.id}/>);
     let messagesElements = props.dialogsPage.messagesData.map(message => <Message message={message.message}/>);
-
-    let newMessgeElement: any = React.createRef();
+    let newMessgeElement: any = state.newMessageText
 
     let addMessage = () => {
-        props.dispatch(addMessageActionCreator());
+        props.addMessage();
     }
-    let onMessageChange = () => {
-        let text = newMessgeElement.current.value;
-        props.dispatch(updateNewMessageTextCreater(text));
+
+    let onMessageChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
+        let text = e.target.value;
+        props.updateNewMessageText(text);
     }
 
     return (
@@ -41,8 +41,7 @@ const Dialogs = (props: PropsType) => {
                 <textarea
                     placeholder="Enter your message"
                     onChange={onMessageChange}
-                    ref={newMessgeElement}
-                    value={props.dialogsPage.newMessageText}
+                    value={newMessgeElement}
                 />
             </div>
             <div>

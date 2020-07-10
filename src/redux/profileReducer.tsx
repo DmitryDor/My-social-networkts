@@ -14,8 +14,9 @@ let initialeState = {
     ],
     newPostText: "It-camasutra"
 }
+type ProfileStateType = typeof initialeState
 
-const profileReducer = (state: ProfilePageType = initialeState, action: DispatchActionType) => {
+const profileReducer = (state: ProfileStateType = initialeState, action: DispatchActionType) => {
     switch (action.type) {
         case ADD_POST:
             let newPostData = {

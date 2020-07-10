@@ -1,14 +1,14 @@
 import React, {DetailedHTMLProps, TextareaHTMLAttributes} from 'react';
 import styles from "./MyPosts.module.css";
 import Post from "./Post/Post";
-import { DispatchActionType, PostType} from "../../../redux/store";
-import {addPostActionCreator, updateNewPostTextCreater} from "../../../redux/profileReducer";
+import {DispatchActionType, PostType} from "../../../redux/store";
 
 
 type PropsType = {
     postData: Array<PostType>,
     newPostText: string
-    dispatch: (action: DispatchActionType) => void
+    addPost: () => void
+    updateNewPostText: (text: string) => void
 }
 
 const MyPosts = (props: PropsType) => {
@@ -18,13 +18,14 @@ const MyPosts = (props: PropsType) => {
 
     let newPostElement: any = React.createRef();
 
-    let addPost = () => {
-        props.dispatch(addPostActionCreator());
-
+    let onAddPost = () => {
+        props.addPost();
     }
+
     let onPostChange = () => {
         let text = newPostElement.current.value;
-        props.dispatch(updateNewPostTextCreater(text));
+        props.updateNewPostText(text);
+
     }
 
     return (
@@ -35,7 +36,7 @@ const MyPosts = (props: PropsType) => {
                     <textarea onChange={onPostChange} ref={newPostElement} value={props.newPostText}/>
                 </div>
                 <div>
-                    <button onClick={addPost}>Add post</button>
+                    <button onClick={onAddPost}>Add post</button>
                 </div>
             </div>
             <div className={styles.posts}>

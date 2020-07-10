@@ -6,5 +6,5 @@ let reducers = combineReducers({
     profilePage: profileReducer,
     dialogsPage: dialogsReducer
 });
-
+export type RootState = ReturnType<typeof reducers>
 export let store = createStore(reducers);
