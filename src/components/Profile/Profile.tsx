@@ -1,11 +1,10 @@
 import React from 'react';
-import styles from "./Profile.module.css";
 import MyPosts from "./MyPosts/MyPosts";
 import ProfileInfo from "./ProfileInfo/ProfileInfo";
-import {PostType} from "./../../index";
+import { ProfilePageType} from "../../redux/state";
 
 type PropsType = {
-    postData: Array<PostType>
+    state: ProfilePageType
 }
 
   const Profile = (props: PropsType) => {
@@ -14,7 +13,7 @@ type PropsType = {
     return (
         <div >
             <ProfileInfo/>
-            <MyPosts postData={props.postData}/>
+            <MyPosts postData={props.state.posts}/>
         </div>
     );
 }
