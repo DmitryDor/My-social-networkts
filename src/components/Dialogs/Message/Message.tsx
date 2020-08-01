@@ -14,5 +14,4 @@ const Message = (props: PropsType1) => {
     )
 }
 
-
 export default Message;
