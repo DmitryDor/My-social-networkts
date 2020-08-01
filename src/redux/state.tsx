@@ -1,3 +1,6 @@
+import {profileReducer} from "./profile-reducer";
+import {dialogsReducer} from "./dialogs-reducer";
+
 export type DialogType = {
     id: string,
     name: string
@@ -47,6 +50,7 @@ export type StoreType = {
 }
 
 
+
 export let store: StoreType = {
     _state: {
         profilePage: {
@@ -89,7 +93,11 @@ export let store: StoreType = {
 
     dispatch(action: ActionType) {
 
-        if (action.type === 'ADD-POST') {
+        this._state.profilePage = profileReducer(this._state.profilePage, action);
+        this._state.dialogsPage = dialogsReducer(this._state.dialogsPage, action);
+        this._callSubscriber(this._state);
+
+       /* if (action.type === 'ADD-POST') {
             let newPost = {id: "4", message: this._state.profilePage.newPostText, likesCount: 0};
             this._state.profilePage.posts.push(newPost);
             this._state.profilePage.newPostText = ''
@@ -107,21 +115,21 @@ export let store: StoreType = {
             if (action.newText)
                 this._state.dialogsPage.newMessageText = action.newText
             this._callSubscriber(this._state);
-        }
+        }*/
     }
 }
 
-const ADD_POST = 'ADD-POST'
+/*const ADD_POST = 'ADD-POST'
 const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT'
 const SEND_MESSAGE = 'SEND-MESSAGE'
-const UPDATE_NEW_MESSAGE_TEXT = 'UPDATE-NEW-MESSAGE-TEXT'
+const UPDATE_NEW_MESSAGE_TEXT = 'UPDATE-NEW-MESSAGE-TEXT'*/
 
 
-export const addPostAC = (): ActionType => ({ type: ADD_POST })
+/*export const addPostAC = (): ActionType => ({ type: ADD_POST })
 
-export const updateNewPostAC = (text: string): ActionType => ({type: UPDATE_NEW_POST_TEXT, newText: text})
+export const updateNewPostAC = (text: string): ActionType => ({type: UPDATE_NEW_POST_TEXT, newText: text})*/
 
-export const sendMessageAC = (): ActionType => ({ type: SEND_MESSAGE })
+/*export const sendMessageAC = (): ActionType => ({ type: SEND_MESSAGE })
 
-export const updateNewMessageAC = (message: string): ActionType => ({type: UPDATE_NEW_MESSAGE_TEXT, newText: message})
+export const updateNewMessageAC = (message: string): ActionType => ({type: UPDATE_NEW_MESSAGE_TEXT, newText: message})*/
 
