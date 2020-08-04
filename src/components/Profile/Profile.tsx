@@ -1,10 +1,11 @@
 import React from 'react';
 import MyPosts from "./MyPosts/MyPosts";
 import ProfileInfo from "./ProfileInfo/ProfileInfo";
-import {ActionType, ProfilePageType} from "../../redux/state";
+
+import {ActionType, InitialStateType} from "../../redux/profile-reducer";
 
 type PropsType = {
-    profilePage: ProfilePageType
+    profilePage: InitialStateType
     /*addPost: () => void
     updateNewPostText: (newText: string) => void*/
     dispatch: (action: ActionType) => void

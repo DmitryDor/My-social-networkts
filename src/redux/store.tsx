@@ -28,17 +28,24 @@ export type DialogsPageType = {
     dialogs: DialogsType
     messages: MessagesType
     newMessageText: string
-
 }
+
 export type StateType = {
     profilePage: ProfilePageType
     dialogsPage: DialogsPageType
 }
-export type ActionType = {
-    type: 'ADD-POST' | 'UPDATE-NEW-POST-TEXT' | 'SEND-MESSAGE' | 'UPDATE-NEW-MESSAGE-TEXT'
-    newText?: string
 
+type ActionProfileType = {
+    type:'ADD-POST' & 'UPDATE-NEW-POST-TEXT'
+    newText?: string
 }
+type ActionDialogsType =   {
+    type: 'SEND-MESSAGE' & 'UPDATE-NEW-MESSAGE-TEXT'
+    newText?: string
+}
+
+
+export type ActionType = ActionProfileType | ActionDialogsType
 
 export type StoreType = {
     _state: StateType
