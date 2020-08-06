@@ -3,24 +3,23 @@ import MyPosts from "./MyPosts/MyPosts";
 import ProfileInfo from "./ProfileInfo/ProfileInfo";
 
 import {ActionType, InitialStateType} from "../../redux/profile-reducer";
+import {MyPostsContainer} from "./MyPosts/Post/MyPostsContainer";
 
 type PropsType = {
-    profilePage: InitialStateType
+    // profilePage: InitialStateType
     /*addPost: () => void
     updateNewPostText: (newText: string) => void*/
-    dispatch: (action: ActionType) => void
+    // dispatch: (action: ActionType) => void
+    store: any
 }
 
   const Profile = (props: PropsType) => {
 
-
     return (
         <div >
             <ProfileInfo/>
-            <MyPosts
-                postData={props.profilePage.posts}
-                newPostText={props.profilePage.newPostText}
-                dispatch={props.dispatch}
+            <MyPostsContainer
+              store={props.store}
             />
         </div>
     );

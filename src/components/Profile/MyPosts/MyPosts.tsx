@@ -8,7 +8,8 @@ import {addPostAC, updateNewPostAC} from "../../../redux/profile-reducer";
 type PropsType = {
     postData: Array<PostType>
     newPostText: string
-    dispatch: (action: ActionType) => void
+    updateNewPostText: (text: string) => void
+    addPost: ()=> void
 }
 
 const MyPosts = (props: PropsType) => {
@@ -24,17 +25,14 @@ const MyPosts = (props: PropsType) => {
 
     // let newPostElement = React.createRef<HTMLTextAreaElement>();
 
-    const addPost = () => {
-        // props.addPost()
-        props.dispatch(addPostAC());
+    const onAddPost = () => {
+        props.addPost()
 
     }
     const onPostChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
-            let text = e.target.value
-            let action = updateNewPostAC(text);
-            props.dispatch(action);
-            }
-
+        let text = e.target.value
+        props.updateNewPostText(text)
+    }
 
     return (
         <div className={styles.postsBlock}>
@@ -49,7 +47,7 @@ const MyPosts = (props: PropsType) => {
                         />
                 </div>
                 <div>
-                    <button onClick={addPost}>Add post</button>
+                    <button onClick={onAddPost}>Add post</button>
                 </div>
             </div>
             <div className={styles.posts}>
