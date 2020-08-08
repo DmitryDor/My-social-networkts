@@ -1,30 +1,34 @@
 import React, {DetailedHTMLProps, TextareaHTMLAttributes} from 'react';
 import Post from "./Post/Post";
-import {DispatchActionType, PostType, StoreType} from "../../../redux/store";
+import {DispatchActionType, PostType, StateType, StoreType} from "../../../redux/store";
 import {addPostActionCreator, updateNewPostTextCreater} from "../../../redux/profileReducer";
 import MyPosts from "./MyPosts";
+import {connect} from "react-redux";
 
-type PropsType = {
-    store: StoreType
+
+
+
+
+let mapStateToProps = (state: StateType) => {
+    return {
+        postData: state.profilePage.postData,
+        newPostText: state.profilePage.newPostText
+    }
+}
+let mapDispatchToProps = (dispatch: DispatchActionType) => {
+    return {
+        updateNewPostText: (text: string) => {
+            let action = updateNewPostTextCreater(text)
+            dispatch(action);
+        },
+        addPost: () => {
+            let action = addPostActionCreator()
+            dispatch(action);
+        }
+    }
 }
 
-const MyPostsContainer = (props: PropsType) => {
-    let state = props.store.getState();
+const MyPostsContainer = connect (mapStateToProps, mapDispatchToProps)(MyPosts);
 
-    let addPost = () => {
-        let action = addPostActionCreator()
-        props.store.dispatch(action);
-
-    }
-    let onPostChange = (text: string) => {
-        let action = updateNewPostTextCreater(text)
-        props.store.dispatch(action);
-    }
-
-    return (
-        <MyPosts updateNewPostText={onPostChange} addPost={addPost} postData={state.profilePage.postData}
-                 newPostText={state.profilePage.newPostText}/>
-    );
-}
 
 export default MyPostsContainer;
