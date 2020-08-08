@@ -12,7 +12,7 @@ let initialeState = {
         {id: "5", message: "Year", likesCount: 5},
         {id: "6", message: "Welcome", likesCount: 18}
     ],
-    newPostText: "It-camasutra"
+    newPostText: ""
 }
 type ProfileStateType = typeof initialeState
 
@@ -24,17 +24,24 @@ const profileReducer = (state: ProfileStateType = initialeState, action: Dispatc
                 message: state.newPostText,
                 likesCount: 0
             };
-            let stateCopy = {...state}
-            stateCopy.postData = [...state.postData]
+            return {
+                ...state,
+                postData: [...state.postData, newPostData ],
+                newPostText: ""
+            }
+           /* stateCopy.postData = [...state.postData]
             stateCopy.postData.push(newPostData)
-            stateCopy.newPostText = "";
-            return stateCopy;
+            stateCopy.newPostText = "";*/
+            // return stateCopy;
         }
         case UPDATE_NEW_POST_TEXT: {
             if (action.newText) {
-                let stateCopy = {...state}
-                stateCopy.newPostText = action.newText;
-                return stateCopy;
+                return  {
+                    ...state,
+                    newPostText: action.newText
+                }
+                // stateCopy.newPostText = action.newText;
+                // return stateCopy;
             }
         }
         default :

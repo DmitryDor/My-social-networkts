@@ -14,7 +14,7 @@ type PropsType = {
 const MyPosts = (props: PropsType) => {
 
     let postElements = props.postData.map(post => <Post message={post.message} likesCount={post.likesCount}
-                                                        id={post.id}/>);
+                                                        id={post.id} key={post.id}/> );
 
     let newPostElement: any = React.createRef();
 
@@ -33,7 +33,7 @@ const MyPosts = (props: PropsType) => {
             <h3>My posts</h3>
             <div>
                 <div>
-                    <textarea onChange={onPostChange} ref={newPostElement} value={props.newPostText}/>
+                    <textarea onChange={onPostChange} ref={newPostElement} value={props.newPostText} placeholder='Enter your message'/>
                 </div>
                 <div>
                     <button onClick={onAddPost}>Add post</button>
