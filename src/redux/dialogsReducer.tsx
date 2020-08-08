@@ -26,24 +26,30 @@ let initialeState = {
 const dialogsReducer = (state: DialogsPageType = initialeState, action: DispatchActionType) => {
 
     switch (action.type) {
-        case ADD_MESSAGE:
+        case ADD_MESSAGE: {
             let messageData = {
-            id: "6",
-            message: state.newMessageText
+                id: "6",
+                message: state.newMessageText
+            }
+            let stateCope = {...state}
+            stateCope.dialogsData = [...state.dialogsData]
+            stateCope.messagesData.push(messageData);
+            stateCope.newMessageText = "";
+            return stateCope
         }
-            state.messagesData.push(messageData);
-            state.newMessageText = "";
-            return state
-        case UPDATE_NEW_MESSAGE_TEXT:
-            if(action.newText)
-            state.newMessageText = action.newText;
-            return state
+        case UPDATE_NEW_MESSAGE_TEXT: {
+            if (action.newText) {
+                let stateCopy = {...state}
+                stateCopy.newMessageText = action.newText;
+                return stateCopy
+            }
+        }
         default:
             return state
     }
 }
 
-export const addMessageActionCreator = () =>( { type: ADD_MESSAGE } )
+export const addMessageActionCreator = () => ({type: ADD_MESSAGE})
 
-export const updateNewMessageTextCreater = (text: string) => ( { type: UPDATE_NEW_MESSAGE_TEXT, newText: text } )
+export const updateNewMessageTextCreater = (text: string) => ({type: UPDATE_NEW_MESSAGE_TEXT, newText: text})
 export default dialogsReducer;

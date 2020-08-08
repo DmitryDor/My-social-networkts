@@ -12,9 +12,9 @@ import DialogsContainer from "./components/Dialogs/Message/DialogsContainer";
 
 
 export type PropsType = {
-    state: StateType
+   /* state: StateType
     dispatch: (action: DispatchActionType) => void
-    store: any
+    store: any*/
 }
 
 const App = (props: PropsType) => {

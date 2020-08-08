@@ -18,26 +18,32 @@ type ProfileStateType = typeof initialeState
 
 const profileReducer = (state: ProfileStateType = initialeState, action: DispatchActionType) => {
     switch (action.type) {
-        case ADD_POST:
+        case ADD_POST: {
             let newPostData = {
                 id: "5",
                 message: state.newPostText,
                 likesCount: 0
             };
-            state.postData.push(newPostData);
-            state.newPostText = "";
-            return state;
-        case UPDATE_NEW_POST_TEXT:
-            if(action.newText)
-            state.newPostText = action.newText;
-            return state;
+            let stateCopy = {...state}
+            stateCopy.postData = [...state.postData]
+            stateCopy.postData.push(newPostData)
+            stateCopy.newPostText = "";
+            return stateCopy;
+        }
+        case UPDATE_NEW_POST_TEXT: {
+            if (action.newText) {
+                let stateCopy = {...state}
+                stateCopy.newPostText = action.newText;
+                return stateCopy;
+            }
+        }
         default :
             return state
     }
 }
 
-export const addPostActionCreator = () => ( { type: ADD_POST } )
+export const addPostActionCreator = () => ({type: ADD_POST})
 
-export const updateNewPostTextCreater = (text: string) => ({ type: UPDATE_NEW_POST_TEXT, newText: text })
+export const updateNewPostTextCreater = (text: string) => ({type: UPDATE_NEW_POST_TEXT, newText: text})
 
 export default profileReducer;
